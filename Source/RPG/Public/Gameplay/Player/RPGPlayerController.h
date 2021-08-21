@@ -13,5 +13,15 @@ UCLASS()
 class RPG_API ARPGPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
+public:
+	ARPGPlayerController();
+
+	void GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const;
+
+protected:
+	virtual void OnPossess(APawn* InPawn) override;
+	virtual void OnRep_PlayerState() override;
+	virtual void SetupInputComponent() override;
+
 };

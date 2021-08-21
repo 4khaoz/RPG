@@ -14,4 +14,13 @@ class RPG_API ARPGGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+
+public:
+	ARPGGameModeBase();
+
+	void RespawnPlayer(AController* Controller);
+
+
+protected:
+	virtual void BeginPlay() override;
 };

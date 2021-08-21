@@ -3,3 +3,16 @@
 
 #include "RPGGameModeBase.h"
 
+ARPGGameModeBase::ARPGGameModeBase()
+{
+
+}
+
+void ARPGGameModeBase::RespawnPlayer(AController* Controller)
+{
+}
+
+void ARPGGameModeBase::BeginPlay()
+{
+	Super::BeginPlay();
+}
