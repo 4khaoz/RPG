@@ -14,4 +14,10 @@ class RPG_API URPGPlayerHUDWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+protected:
+	UPROPERTY(meta=(BindWidget))
+	class UTextBlock* HealthText;
+
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* MaxHealthText;
 };

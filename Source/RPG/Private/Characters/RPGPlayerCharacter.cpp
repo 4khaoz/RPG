@@ -4,6 +4,7 @@
 #include "Characters/RPGPlayerCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Gameplay/AbilitySystem/RPGAttributeSet.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter()
 {
@@ -48,6 +49,78 @@ void ARPGPlayerCharacter::OnRep_PlayerState()
 void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+float ARPGPlayerCharacter::GetMana() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetMana();
+	}
+	return -1.f;
+}
+
+float ARPGPlayerCharacter::GetMaxMana() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetMaxMana();
+	}
+	return -1.f;
+}
+
+float ARPGPlayerCharacter::GetStamina() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetStamina();
+	}
+	return -1.f;
+}
+
+float ARPGPlayerCharacter::GetMaxStamina() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetMaxStamina();
+	}
+	return -1.f;
+}
+
+float ARPGPlayerCharacter::GetHunger() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetHunger();
+	}
+	return -1.f;
+}
+
+float ARPGPlayerCharacter::GetMaxHunger() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetMaxHunger();
+	}
+	return -1.f;
+}
+
+float ARPGPlayerCharacter::GetThirst() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetThirst();
+	}
+	return -1.f;
+}
+
+float ARPGPlayerCharacter::GetMaxThirst() const
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetMaxThirst();
+	}
+	return -1.f;
 }
 
 void ARPGPlayerCharacter::MoveForward(const float Value)

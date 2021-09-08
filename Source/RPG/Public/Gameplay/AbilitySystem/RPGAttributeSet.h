@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
-#include "RPGAttributeSetGeneral.generated.h"
+#include "RPGAttributeSet.generated.h"
 
 // Uses macros from AttributeSet.h
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
@@ -18,12 +18,12 @@
  * 
  */
 UCLASS()
-class RPG_API URPGAttributeSetGeneral : public UAttributeSet
+class RPG_API URPGAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
-	
+
 public:
-	URPGAttributeSetGeneral();
+	URPGAttributeSet();
 
 	// AttributeSet Overrides
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
@@ -31,45 +31,45 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_Health)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Health)
 	FGameplayAttributeData Health;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, Health)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Health)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_MaxHealth)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_MaxHealth)
 	FGameplayAttributeData MaxHealth;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, MaxHealth)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, MaxHealth)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_Mana)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Mana)
 	FGameplayAttributeData Mana;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, Mana)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Mana)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_MaxMana)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_MaxMana)
 	FGameplayAttributeData MaxMana;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, MaxMana)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, MaxMana)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_Stamina)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Stamina)
 	FGameplayAttributeData Stamina;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, Stamina)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Stamina)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_MaxStamina)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_MaxStamina)
 	FGameplayAttributeData MaxStamina;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, MaxStamina)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, MaxStamina)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_Hunger)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Hunger)
 	FGameplayAttributeData Hunger;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, Hunger)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Hunger)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_MaxHunger)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_MaxHunger)
 	FGameplayAttributeData MaxHunger;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, MaxHunger)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, MaxHunger)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_Thirst)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Thirst)
 	FGameplayAttributeData Thirst;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, Thirst)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Thirst)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", ReplicatedUsing = OnRep_MaxThirst)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_MaxThirst)
 	FGameplayAttributeData MaxThirst;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSetGeneral, MaxThirst)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, MaxThirst)
 
 protected:
 	/**

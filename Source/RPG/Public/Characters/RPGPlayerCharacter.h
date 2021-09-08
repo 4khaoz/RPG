@@ -14,6 +14,7 @@ class RPG_API ARPGPlayerCharacter : public ARPGBaseCharacter
 {
 	GENERATED_BODY()
 
+public:
 	ARPGPlayerCharacter();
 
 	// Called when the game starts or when spawned
@@ -22,6 +23,32 @@ class RPG_API ARPGPlayerCharacter : public ARPGBaseCharacter
 	virtual void OnRep_PlayerState() override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	/**
+	Getters for Attributes only Player Character has
+	*/
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetMana() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetMaxMana() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetStamina() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetMaxStamina() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetHunger() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetMaxHunger() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetThirst() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetMaxThirst() const;
 
 protected:
 	/* Camera Components */
