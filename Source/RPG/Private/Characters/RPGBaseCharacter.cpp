@@ -4,6 +4,7 @@
 #include "Characters/RPGBaseCharacter.h"
 #include "Gameplay/AbilitySystem/RPGAbilitySystemComponent.h"
 #include "Gameplay/AbilitySystem/RPGAttributeSet.h"
+#include "Abilities/GameplayAbility.h"
 
 // Sets default values
 ARPGBaseCharacter::ARPGBaseCharacter()
@@ -33,6 +34,38 @@ void ARPGBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 }
 
+bool ARPGBaseCharacter::bIsAlive() const
+{
+	return false;
+}
+
+float ARPGBaseCharacter::GetCharacterLevel()
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetCharacterLevel();
+	}
+	return 0.0f;
+}
+
+float ARPGBaseCharacter::GetMovementSpeed()
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetMovementSpeed();
+	}
+	return 0.0f;
+}
+
+float ARPGBaseCharacter::GetMovementSpeedBaseValue()
+{
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetMovementSpeedAttribute().GetGameplayAttributeData(AttributeSet)->GetBaseValue();
+	}
+	return 0.0f;
+}
+
 float ARPGBaseCharacter::GetHealth() const
 {
 	if (IsValid(AttributeSet))
@@ -55,7 +88,8 @@ float ARPGBaseCharacter::GetMaxHealth() const
 void ARPGBaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	InitDefaultAttributesAndEffectsOnSpawn();
 }
 
 void ARPGBaseCharacter::PossessedBy(AController* NewController)
@@ -68,6 +102,24 @@ void ARPGBaseCharacter::OnRep_PlayerState()
 	Super::OnRep_PlayerState();
 }
 
+void ARPGBaseCharacter::InitDefaultAttributesAndEffectsOnSpawn()
+{
+	if (!AbilitySystemComponent || DefaultAttributesAndEffects.IsEmpty())
+		return;
+
+	FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+	EffectContext.AddSourceObject(this);
+
+	for (TSubclassOf<UGameplayEffect> GE_Class : DefaultAttributesAndEffects)
+	{
+		FGameplayEffectSpecHandle EffectSpec = AbilitySystemComponent->MakeOutgoingSpec(GE_Class, 1, EffectContext);
+		if (EffectSpec.IsValid())
+		{
+			FActiveGameplayEffectHandle ActiveGEHandle = AbilitySystemComponent->ApplyGameplayEffectSpecToTarget(*EffectSpec.Data.Get(), AbilitySystemComponent);
+		}
+	}
+}
+
 UAbilitySystemComponent* ARPGBaseCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
@@ -78,8 +130,19 @@ URPGAttributeSet* ARPGBaseCharacter::GetAttributeSet() const
 	return AttributeSet;
 }
 
-void ARPGBaseCharacter::GrantAbility()
+void ARPGBaseCharacter::GrantAbility(TSubclassOf<UGameplayAbility> AbilityClass, int32 AbilityLevel, int32 InputCode)
 {
+	if (GetLocalRole() == ROLE_Authority && IsValid(AbilitySystemComponent) && IsValid(AbilityClass))
+	{
+		UGameplayAbility* Ability = AbilityClass->GetDefaultObject<UGameplayAbility>();
+
+		if (IsValid(Ability))
+		{
+			FGameplayAbilitySpec AbilitySpec(Ability, AbilityLevel, InputCode);
+
+			AbilitySystemComponent->GiveAbility(AbilitySpec);
+		}
+	}
 }
 
 void ARPGBaseCharacter::CancelAbility(const FGameplayTagContainer CancelWithTags)

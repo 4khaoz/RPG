@@ -11,19 +11,23 @@ ARPGPlayerController::ARPGPlayerController()
 void ARPGPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
 }
 
 void ARPGPlayerController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+
 }
 
 void ARPGPlayerController::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
+
 }
 
 void ARPGPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
+
 }

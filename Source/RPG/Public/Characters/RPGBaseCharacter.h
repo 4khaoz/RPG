@@ -23,6 +23,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Returns true if Health > 0.f
+	bool bIsAlive() const;
+
 	/**
 	Implement IAbilitySystemInterface
 	*/
@@ -30,7 +33,7 @@ public:
 	class URPGAttributeSet* GetAttributeSet() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
-	void GrantAbility();
+	void GrantAbility(TSubclassOf<class UGameplayAbility> AbilityClass, int32 AbilityLevel, int32 InputCode);
 
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
 	void CancelAbility(const FGameplayTagContainer CancelWithTags);
@@ -39,16 +42,28 @@ public:
 	Getters for Attributes every Character has
 	*/
 	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetCharacterLevel();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetMovementSpeed();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetMovementSpeedBaseValue();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetHealth() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetMaxHealth() const;
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
+
+	void InitDefaultAttributesAndEffectsOnSpawn();
 
 	/**
 	Gameplay Ability System
@@ -58,4 +73,7 @@ protected:
 
 	UPROPERTY()
 	class URPGAttributeSet* AttributeSet;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
+	TArray<TSubclassOf<class UGameplayEffect>> DefaultAttributesAndEffects;
 };

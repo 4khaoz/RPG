@@ -17,6 +17,8 @@ class RPG_API ARPGPlayerState : public APlayerState
 public:
 	ARPGPlayerState();
 
+	class URPGInventory* GetInventory();
+
 protected:
-	// Inventory
+	class URPGInventory* Inventory;
 };
