@@ -24,4 +24,13 @@ protected:
 	virtual void OnRep_PlayerState() override;
 	virtual void SetupInputComponent() override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", Replicated)
+	class URPGInventory* Inventory;
+
+private:
+	UFUNCTION(BlueprintCallable)
+	void EnableCursorMode();
+
+	UFUNCTION(BlueprintCallable)
+	void SetCursorToCenter();
 };

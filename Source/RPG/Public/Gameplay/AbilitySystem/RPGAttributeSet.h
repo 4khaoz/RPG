@@ -209,11 +209,17 @@ public:
 	/**
 	Utility Character Stats
 	*/
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Presence)
 	FGameplayAttributeData Presence;
-	FGameplayAttributeData Toughness;
-	FGameplayAttributeData Endurance;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Presence)
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Vitality)
 	FGameplayAttributeData Vitality;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Vitality)
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Spirit)
 	FGameplayAttributeData Spirit;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Spirit)
 
 protected:
 	/**
@@ -323,4 +329,13 @@ protected:
 
 	UFUNCTION()
 	virtual void OnRep_DarknessResistance(const FGameplayAttributeData& OldDarknessResistance);
+
+	UFUNCTION()
+	virtual void OnRep_Presence(const FGameplayAttributeData& OldPresence);
+	
+	UFUNCTION()
+	virtual void OnRep_Vitality(const FGameplayAttributeData& OldVitality);
+	
+	UFUNCTION()
+	virtual void OnRep_Spirit(const FGameplayAttributeData& OldSpirit);
 };

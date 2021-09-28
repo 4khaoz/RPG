@@ -75,6 +75,11 @@ void URPGAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, GeoResistance, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, LightResistance, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, DarknessResistance, COND_None, REPNOTIFY_Always);
+
+
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, Presence, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, Vitality, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, Spirit, COND_None, REPNOTIFY_Always);
 }
 
 void URPGAttributeSet::OnRep_CharacterLevel(const FGameplayAttributeData& OldCharacterLevel)
@@ -250,4 +255,19 @@ void URPGAttributeSet::OnRep_LightResistance(const FGameplayAttributeData& OldLi
 void URPGAttributeSet::OnRep_DarknessResistance(const FGameplayAttributeData& OldDarknessResistance)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet, DarknessResistance, OldDarknessResistance);
+}
+
+void URPGAttributeSet::OnRep_Presence(const FGameplayAttributeData& OldPresence)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet, Presence, OldPresence);
+}
+
+void URPGAttributeSet::OnRep_Vitality(const FGameplayAttributeData& OldVitality)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet, Vitality, OldVitality);
+}
+
+void URPGAttributeSet::OnRep_Spirit(const FGameplayAttributeData& OldSpirit)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet, Spirit, OldSpirit);
 }

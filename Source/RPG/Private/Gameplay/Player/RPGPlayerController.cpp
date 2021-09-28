@@ -2,10 +2,11 @@
 
 
 #include "Gameplay/Player/RPGPlayerController.h"
+#include "Gameplay/Items/RPGInventory.h"
 
 ARPGPlayerController::ARPGPlayerController()
 {
-
+	Inventory = CreateDefaultSubobject<URPGInventory>(TEXT("Inventory"));
 }
 
 void ARPGPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
