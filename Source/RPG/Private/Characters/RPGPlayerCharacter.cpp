@@ -34,6 +34,8 @@ ARPGPlayerCharacter::ARPGPlayerCharacter()
 void ARPGPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	ApplyInitialGameplayEffects(PlayerOnlyEffects);
 }
 
 void ARPGPlayerCharacter::PossessedBy(AController* NewController)

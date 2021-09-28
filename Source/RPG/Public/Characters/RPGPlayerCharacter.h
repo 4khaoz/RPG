@@ -72,4 +72,7 @@ protected:
 private:
 	float BaseTurnRate;
 	float BaseLookRate;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
+	TArray<TSubclassOf<class UGameplayEffect>> PlayerOnlyEffects;
 };

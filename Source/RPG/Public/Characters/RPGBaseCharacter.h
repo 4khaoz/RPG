@@ -63,7 +63,7 @@ protected:
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 
-	void InitDefaultAttributesAndEffectsOnSpawn();
+	void ApplyInitialGameplayEffects(TArray<TSubclassOf<class UGameplayEffect>> Effects);
 
 	/**
 	Gameplay Ability System

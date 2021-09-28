@@ -36,6 +36,10 @@ void ARPGBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 bool ARPGBaseCharacter::bIsAlive() const
 {
+	if (IsValid(AttributeSet))
+	{
+		return AttributeSet->GetHealth() > 0.f;
+	}
 	return false;
 }
 
@@ -89,7 +93,7 @@ void ARPGBaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	InitDefaultAttributesAndEffectsOnSpawn();
+	ApplyInitialGameplayEffects(DefaultAttributesAndEffects);
 }
 
 void ARPGBaseCharacter::PossessedBy(AController* NewController)
@@ -102,15 +106,15 @@ void ARPGBaseCharacter::OnRep_PlayerState()
 	Super::OnRep_PlayerState();
 }
 
-void ARPGBaseCharacter::InitDefaultAttributesAndEffectsOnSpawn()
+void ARPGBaseCharacter::ApplyInitialGameplayEffects(TArray<TSubclassOf<class UGameplayEffect>> Effects)
 {
-	if (!AbilitySystemComponent || DefaultAttributesAndEffects.IsEmpty())
+	if (!AbilitySystemComponent || Effects.IsEmpty())
 		return;
 
 	FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
 	EffectContext.AddSourceObject(this);
 
-	for (TSubclassOf<UGameplayEffect> GE_Class : DefaultAttributesAndEffects)
+	for (TSubclassOf<UGameplayEffect> GE_Class : Effects)
 	{
 		FGameplayEffectSpecHandle EffectSpec = AbilitySystemComponent->MakeOutgoingSpec(GE_Class, 1, EffectContext);
 		if (EffectSpec.IsValid())
