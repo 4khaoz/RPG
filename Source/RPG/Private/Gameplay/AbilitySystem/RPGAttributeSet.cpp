@@ -32,6 +32,14 @@ void URPGAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	{
 		SetStamina(FMath::Clamp(GetStamina(), 0.f, GetMaxStamina()));
 	}
+	if (Data.EvaluatedData.Attribute == GetHungerAttribute())
+	{
+		SetHunger(FMath::Clamp(GetHunger(), 0.f, GetMaxHunger()));
+	}
+	if (Data.EvaluatedData.Attribute == GetThirstAttribute())
+	{
+		SetThirst(FMath::Clamp(GetThirst(), 0.f, GetMaxThirst()));
+	}
 }
 
 void URPGAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

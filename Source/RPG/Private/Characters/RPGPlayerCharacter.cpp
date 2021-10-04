@@ -158,3 +158,7 @@ void ARPGPlayerCharacter::LookCamera(const float Value)
 {
 	AddControllerPitchInput(Value * BaseLookRate * GetWorld()->GetDeltaSeconds());
 }
+
+void ARPGPlayerCharacter::Interact()
+{
+}

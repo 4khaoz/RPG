@@ -69,6 +69,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void LookCamera(const float Value);
 
+	UFUNCTION(BlueprintCallable)
+	void Interact();
+
 private:
 	float BaseTurnRate;
 	float BaseLookRate;

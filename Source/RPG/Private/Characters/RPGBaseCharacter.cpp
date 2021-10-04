@@ -106,7 +106,7 @@ void ARPGBaseCharacter::OnRep_PlayerState()
 	Super::OnRep_PlayerState();
 }
 
-void ARPGBaseCharacter::ApplyInitialGameplayEffects(TArray<TSubclassOf<class UGameplayEffect>> Effects)
+void ARPGBaseCharacter::ApplyInitialGameplayEffects(TArray<TSubclassOf<UGameplayEffect>> Effects)
 {
 	if (!AbilitySystemComponent || Effects.IsEmpty())
 		return;

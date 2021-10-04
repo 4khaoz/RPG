@@ -32,5 +32,8 @@ private:
 	void EnableCursorMode();
 
 	UFUNCTION(BlueprintCallable)
+	void DisableCursorMode();
+
+	UFUNCTION(BlueprintCallable)
 	void SetCursorToCenter();
 };

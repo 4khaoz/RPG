@@ -43,6 +43,13 @@ void ARPGPlayerController::EnableCursorMode()
 {
 	SetInputMode(FInputModeGameAndUI());
 	SetCursorToCenter();
+	SetShowMouseCursor(true);
+}
+
+void ARPGPlayerController::DisableCursorMode()
+{
+	SetInputMode(FInputModeGameOnly());
+	SetShowMouseCursor(false);
 }
 
 void ARPGPlayerController::SetCursorToCenter()
