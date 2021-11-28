@@ -43,7 +43,6 @@ public:
 	URPGItem()
 		: ItemQuality(EItemQuality::Common)
 		, ItemPrice(0)
-		, ItemStacks(1)
 		, ItemLevel(1)
 	{}
 
@@ -73,15 +72,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetItemLevel() const { return ItemLevel; }
-
-	UFUNCTION(BlueprintCallable)
-	void AddStack(const int stacks)
-	{
-		if (bStackable)
-		{
-			ItemStacks += stacks;
-		}
-	}
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetItemWeight() { return ItemWeight; }
@@ -113,9 +103,6 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	bool bStackable;
-
-	UPROPERTY(EditAnywhere)
-	int ItemStacks;
 
 	UPROPERTY(EditAnywhere)
 	float ItemWeight;

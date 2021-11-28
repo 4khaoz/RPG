@@ -7,47 +7,64 @@
 // Sets default values for this component's properties
 URPGInventory::URPGInventory()
 {
-	InventoryCapacity = 60;
+	InventorySlotsLimit = 60;
+	InventoryWeightLimit = 500.f;
 }
 
 
 void URPGInventory::ServerAddItem_Implementation(URPGItem* item)
 {
-	if (InventoryContainer.Num() < InventoryCapacity)
+	// Iterate through all Inventory Slots
+	int emptySlot = -1;
+	for (int i = 0; i < InventorySlotsLimit; i++)
 	{
-		// Sort Inventory by SlotIndex
-		InventoryContainer.Sort([](const FItemSlot& a, const FItemSlot& b) { return a < b; });
-
-		int i = 0;
-		for (FItemSlot& it : InventoryContainer)
-		{
-			if (it.SlotIndex != i)
-			{
-				break;
-			}
-			i++;
-		}
-		InventoryContainer.Add(FItemSlot(i, item));
-		ClientOnInventoryUpdate();
+		
 	}
+	ClientOnInventoryUpdate();
 }
 
 void URPGInventory::ServerRemoveItem_Implementation()
 {
 }
 
-void URPGInventory::ServerInsertItem_Implementation(URPGItem* item, int slot)
+void URPGInventory::ServerInsertItemAtIndex_Implementation(URPGItem* item, int index)
 {
+	if (InventoryContainer.IsValidIndex(index))
+	{
+
+	}
 }
 
 URPGItem* URPGInventory::GetItemAt(int index)
 {
-	return nullptr;
+	if (InventoryContainer.IsValidIndex(index))
+	{
+		return InventoryContainer[index].Item;
+	}
+	return NULL;
 }
 
-int URPGInventory::GetInventoryCapacity()
+int URPGInventory::GetNumberOfUsedSlots()
 {
-	return InventoryCapacity;
+	int UsedSlotsCount = 0;
+	for (auto& slot : InventoryContainer)
+	{
+		if (slot.Item != NULL)
+		{
+			UsedSlotsCount++;
+		}
+	}
+	return UsedSlotsCount;
+}
+
+float URPGInventory::GetInventoryWeight()
+{
+	float TotalWeight = 0;
+	for (auto& slot : InventoryContainer)
+	{
+		TotalWeight += slot.Item->GetItemWeight() * slot.ItemStacks;
+	}
+	return TotalWeight;
 }
 
 void URPGInventory::ClientOnInventoryUpdate_Implementation()

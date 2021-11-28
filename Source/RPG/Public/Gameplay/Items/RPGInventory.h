@@ -14,23 +14,23 @@ struct FItemSlot
 
 	// Default Constructor
 	FItemSlot()
-		: SlotIndex(-1)
+		: ItemStacks(0)
 	{ }
 
-	FItemSlot(int slot, URPGItem* item)
-		: SlotIndex(slot)
-		, SlottedItem(item)
+	FItemSlot(URPGItem* item)
+		: Item(item)
+		, ItemStacks(1)
 	{ }
 
 	UPROPERTY(BlueprintReadOnly)
-	int SlotIndex;
+	URPGItem* Item;
 
 	UPROPERTY(BlueprintReadOnly)
-	URPGItem* SlottedItem;
+	int ItemStacks;
 
-	bool operator<(const FItemSlot& other) const
+	bool operator==(const FItemSlot& other) const
 	{
-		return SlotIndex < other.SlotIndex;
+		return Item == other.Item;
 	}
 };
 
@@ -46,20 +46,29 @@ public:
 	// Sets default values for this component's properties
 	URPGInventory();
 
+	/* Add Item to Inventory */
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void ServerAddItem(URPGItem* item);
 
+	/* Remove Item from Inventory */
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void ServerRemoveItem();
 
+	/* Insert Item at specified Inventory index */
 	UFUNCTION(BlueprintCallable, Server, Reliable)
-	void ServerInsertItem(URPGItem* item, int slot);
+	void ServerInsertItemAtIndex(URPGItem* item, int index);
 	
+	/* Get Item at specified Inventory index */
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	URPGItem* GetItemAt(int index);
 
+	/* Get Number of Inventory Slots used */
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int GetInventoryCapacity();
+	int GetNumberOfUsedSlots();
+
+	/* Get Total Weight of all Items in Inventory */
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetInventoryWeight();
 	
 	/**
 	Delegates & ClientSide Call
@@ -82,7 +91,8 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	int InventoryCapacity;
+	int InventorySlotsLimit;
+	float InventoryWeightLimit;
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)
 	TArray<FItemSlot> InventoryContainer;
