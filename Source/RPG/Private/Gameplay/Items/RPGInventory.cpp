@@ -11,19 +11,39 @@ URPGInventory::URPGInventory()
 	InventoryWeightLimit = 500.f;
 }
 
+bool URPGInventory::ServerAddItem_Validate(URPGItem* item)
+{
+	// Check if InventoryWeightLimit is reached
+	if (GetInventoryWeight() + item->GetItemWeight() > InventoryWeightLimit)
+	{
+		// LOGMSG InventoryWeightLimit reached - Cannot Add Item
+		return false;
+	}
+
+	if (FindFirstFreeSlot() == -1)
+	{
+		return false;
+	}
+
+	// HTTP Call to add item to Database
+	// Successful if Response Success
+	
+
+	return true;
+}
 
 void URPGInventory::ServerAddItem_Implementation(URPGItem* item)
 {
-	// Iterate through all Inventory Slots
-	int emptySlot = -1;
-	for (int i = 0; i < InventorySlotsLimit; i++)
-	{
-		
-	}
+	InventoryContainer[FindFirstFreeSlot()] = FItemSlot(item);
 	ClientOnInventoryUpdate();
 }
 
-void URPGInventory::ServerRemoveItem_Implementation()
+bool URPGInventory::ServerRemoveItemByIndex_Validate()
+{
+	return true;
+}
+
+void URPGInventory::ServerRemoveItemByIndex_Implementation()
 {
 }
 
@@ -67,6 +87,16 @@ float URPGInventory::GetInventoryWeight()
 	return TotalWeight;
 }
 
+int URPGInventory::GetInventorySlotsLimit()
+{
+	return InventorySlotsLimit;
+}
+
+float URPGInventory::GetInventoryWeightLimit()
+{
+	return InventoryWeightLimit;
+}
+
 void URPGInventory::ClientOnInventoryUpdate_Implementation()
 {
 	// Call OnRep-Functio on Client to trigger InventoryUpdate in Widget
@@ -94,6 +124,21 @@ void URPGInventory::BeginPlay()
 
 	// ...
 	
+}
+
+int URPGInventory::FindFirstFreeSlot()
+{
+	// -1 means it is invalid
+	int index = -1;
+	for (int i = 0; i < InventorySlotsLimit; i++)
+	{
+		if (!InventoryContainer[index].Item)
+		{
+			index = i;
+			break;
+		}
+	}
+	return index;
 }
 
 void URPGInventory::OnRep_Inventory()

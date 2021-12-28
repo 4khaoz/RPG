@@ -15,7 +15,8 @@ public class RPG : ModuleRules
 			"InputCore",
 			"GameplayAbilities",
 			"GameplayTags",
-			"GameplayTasks"
+			"GameplayTasks",
+			"HTTP"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

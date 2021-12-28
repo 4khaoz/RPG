@@ -47,12 +47,12 @@ public:
 	URPGInventory();
 
 	/* Add Item to Inventory */
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable, Server, WithValidation, Reliable)
 	void ServerAddItem(URPGItem* item);
 
 	/* Remove Item from Inventory */
-	UFUNCTION(BlueprintCallable, Server, Reliable)
-	void ServerRemoveItem();
+	UFUNCTION(BlueprintCallable, Server, WithValidation, Reliable)
+	void ServerRemoveItemByIndex();
 
 	/* Insert Item at specified Inventory index */
 	UFUNCTION(BlueprintCallable, Server, Reliable)
@@ -69,6 +69,14 @@ public:
 	/* Get Total Weight of all Items in Inventory */
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetInventoryWeight();
+
+	/* Get Slots Limit of Inventory */
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int GetInventorySlotsLimit();
+
+	/* Get Weight Limit of Inventory*/
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetInventoryWeightLimit();
 	
 	/**
 	Delegates & ClientSide Call
@@ -90,6 +98,8 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	int FindFirstFreeSlot();
 
 	int InventorySlotsLimit;
 	float InventoryWeightLimit;

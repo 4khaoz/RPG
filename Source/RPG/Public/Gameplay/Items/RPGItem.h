@@ -13,6 +13,7 @@ enum class EItemQuality : uint8
 	Uncommon	UMETA(DisplayName = "Uncommon"),	// Green
 	Superior	UMETA(DisplayName = "Superior"),	// Blue
 	Epic		UMETA(DisplayName = "Epic"),		// Purple
+	Masterwork	UMETA(DisplayName = "Masterwork"),	// Pink
 	Legendary	UMETA(DisplayName = "Legendary"),	// Yellow Gold
 	Legacy		UMETA(DisplayName = "Legacy")		// Red
 };
