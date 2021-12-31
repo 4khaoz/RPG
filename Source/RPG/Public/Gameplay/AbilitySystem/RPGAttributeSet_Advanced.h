@@ -137,9 +137,7 @@ public:
 	FGameplayAttributeData DarknessResistance;
 	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, DarknessResistance)
 
-	/**
-	Utility Character Stats
-	*/
+	/* Increase Aggro-Generation */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Presence)
 	FGameplayAttributeData Presence;
 	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, Presence)

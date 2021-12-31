@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Characters/RPGBaseCharacter.h"
+#include <RPG/Public/Networking/RPGHttp_Items.h>
 #include "RPGPlayerCharacter.generated.h"
 
 /**
@@ -78,4 +79,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Abilities")
 	TArray<TSubclassOf<class UGameplayEffect>> PlayerOnlyEffects;
+
+	RPGHttp_Items* Http_Items;
 };

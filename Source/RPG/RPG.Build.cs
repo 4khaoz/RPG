@@ -16,7 +16,9 @@ public class RPG : ModuleRules
 			"GameplayAbilities",
 			"GameplayTags",
 			"GameplayTasks",
-			"HTTP"
+			"HTTP",
+			"Json",
+			"JsonUtilities"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

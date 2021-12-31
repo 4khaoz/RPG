@@ -7,21 +7,17 @@
 // Sets default values for this component's properties
 URPGInventory::URPGInventory()
 {
-	InventorySlotsLimit = 60;
-	InventoryWeightLimit = 500.f;
+	Capacity = 80;
 }
 
 bool URPGInventory::ServerAddItem_Validate(URPGItem* item)
 {
-	// Check if InventoryWeightLimit is reached
-	if (GetInventoryWeight() + item->GetItemWeight() > InventoryWeightLimit)
+	// Find Index for first free slot
+	FreeSlotIndex = FindFirstFreeSlot();
+	if (FreeSlotIndex == -1)
 	{
-		// LOGMSG InventoryWeightLimit reached - Cannot Add Item
-		return false;
-	}
-
-	if (FindFirstFreeSlot() == -1)
-	{
+		// Inventory is full
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, "Free Slot not found - Inventory full");
 		return false;
 	}
 
@@ -34,7 +30,7 @@ bool URPGInventory::ServerAddItem_Validate(URPGItem* item)
 
 void URPGInventory::ServerAddItem_Implementation(URPGItem* item)
 {
-	InventoryContainer[FindFirstFreeSlot()] = FItemSlot(item);
+	InventoryContainer[FreeSlotIndex] = FItemSlot(item, FreeSlotIndex);
 	ClientOnInventoryUpdate();
 }
 
@@ -45,14 +41,21 @@ bool URPGInventory::ServerRemoveItemByIndex_Validate()
 
 void URPGInventory::ServerRemoveItemByIndex_Implementation()
 {
+
+}
+
+bool URPGInventory::ServerInsertItemAtIndex_Validate(URPGItem* item, int index)
+{
+	if (!InventoryContainer.IsValidIndex(index))
+	{
+		return false;
+	}
+	return true;
 }
 
 void URPGInventory::ServerInsertItemAtIndex_Implementation(URPGItem* item, int index)
 {
-	if (InventoryContainer.IsValidIndex(index))
-	{
-
-	}
+	
 }
 
 URPGItem* URPGInventory::GetItemAt(int index)
@@ -61,7 +64,7 @@ URPGItem* URPGInventory::GetItemAt(int index)
 	{
 		return InventoryContainer[index].Item;
 	}
-	return NULL;
+	return nullptr;
 }
 
 int URPGInventory::GetNumberOfUsedSlots()
@@ -69,7 +72,7 @@ int URPGInventory::GetNumberOfUsedSlots()
 	int UsedSlotsCount = 0;
 	for (auto& slot : InventoryContainer)
 	{
-		if (slot.Item != NULL)
+		if (slot.Item)
 		{
 			UsedSlotsCount++;
 		}
@@ -77,24 +80,9 @@ int URPGInventory::GetNumberOfUsedSlots()
 	return UsedSlotsCount;
 }
 
-float URPGInventory::GetInventoryWeight()
+int URPGInventory::GetInventoryCapacity()
 {
-	float TotalWeight = 0;
-	for (auto& slot : InventoryContainer)
-	{
-		TotalWeight += slot.Item->GetItemWeight() * slot.ItemStacks;
-	}
-	return TotalWeight;
-}
-
-int URPGInventory::GetInventorySlotsLimit()
-{
-	return InventorySlotsLimit;
-}
-
-float URPGInventory::GetInventoryWeightLimit()
-{
-	return InventoryWeightLimit;
+	return Capacity;
 }
 
 void URPGInventory::ClientOnInventoryUpdate_Implementation()
@@ -130,7 +118,7 @@ int URPGInventory::FindFirstFreeSlot()
 {
 	// -1 means it is invalid
 	int index = -1;
-	for (int i = 0; i < InventorySlotsLimit; i++)
+	for (int i = 0; i < Capacity; i++)
 	{
 		if (!InventoryContainer[index].Item)
 		{

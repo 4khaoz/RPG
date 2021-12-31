@@ -12,25 +12,25 @@ struct FItemSlot
 {
 	GENERATED_USTRUCT_BODY()
 
-	// Default Constructor
-	FItemSlot()
-		: ItemStacks(0)
+	// Default Constructor, -1 means invalid
+	FItemSlot() 
+		: SlotIndex(-1)
 	{ }
 
-	FItemSlot(URPGItem* item)
+	FItemSlot(URPGItem* item, uint8 index)
 		: Item(item)
-		, ItemStacks(1)
+		, SlotIndex(index)
 	{ }
 
 	UPROPERTY(BlueprintReadOnly)
 	URPGItem* Item;
 
 	UPROPERTY(BlueprintReadOnly)
-	int ItemStacks;
+	uint8 SlotIndex;
 
 	bool operator==(const FItemSlot& other) const
 	{
-		return Item == other.Item;
+		return Item == other.Item && SlotIndex == other.SlotIndex;
 	}
 };
 
@@ -46,6 +46,9 @@ public:
 	// Sets default values for this component's properties
 	URPGInventory();
 
+	///////////////////////////////////////////////////////////////////////////
+	// Server Functions
+
 	/* Add Item to Inventory */
 	UFUNCTION(BlueprintCallable, Server, WithValidation, Reliable)
 	void ServerAddItem(URPGItem* item);
@@ -55,9 +58,12 @@ public:
 	void ServerRemoveItemByIndex();
 
 	/* Insert Item at specified Inventory index */
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable, Server, WithValidation, Reliable)
 	void ServerInsertItemAtIndex(URPGItem* item, int index);
 	
+	///////////////////////////////////////////////////////////////////////////
+	// Getters
+
 	/* Get Item at specified Inventory index */
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	URPGItem* GetItemAt(int index);
@@ -66,17 +72,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetNumberOfUsedSlots();
 
-	/* Get Total Weight of all Items in Inventory */
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	float GetInventoryWeight();
-
 	/* Get Slots Limit of Inventory */
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int GetInventorySlotsLimit();
-
-	/* Get Weight Limit of Inventory*/
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	float GetInventoryWeightLimit();
+	int GetInventoryCapacity();
 	
 	/**
 	Delegates & ClientSide Call
@@ -99,10 +97,12 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	// Returns index of first free slot, -1 if invalid
 	int FindFirstFreeSlot();
+	int FreeSlotIndex;
 
-	int InventorySlotsLimit;
-	float InventoryWeightLimit;
+	// Maximum number of items in the inventory
+	int Capacity;
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)
 	TArray<FItemSlot> InventoryContainer;

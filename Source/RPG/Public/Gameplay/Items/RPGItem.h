@@ -3,40 +3,47 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
+#include "../../Networking/RPGHttp_Items.h"
 #include "RPGItem.generated.h"
 
 UENUM(BlueprintType)
 enum class EItemQuality : uint8
 {
-	Common		UMETA(DisplayName = "Common"),	// White Grey
+	Common		UMETA(DisplayName = "Common"),		// White Grey
 	Uncommon	UMETA(DisplayName = "Uncommon"),	// Green
 	Superior	UMETA(DisplayName = "Superior"),	// Blue
 	Epic		UMETA(DisplayName = "Epic"),		// Purple
-	Masterwork	UMETA(DisplayName = "Masterwork"),	// Pink
-	Legendary	UMETA(DisplayName = "Legendary"),	// Yellow Gold
+	Legendary	UMETA(DisplayName = "Legendary"),	// Yellow Gold / Orange
 	Legacy		UMETA(DisplayName = "Legacy")		// Red
 };
 
 UENUM(BlueprintType)
 enum class EItemType : uint8
 {
+	// Gear
 	Weapon,
+	Shield,
 	Helmet,
-	Armorset,
-	Bracelet,
+	BodyArmor,
+	Gloves,
+	Pants,
 	Ring,
-	Earring,
-	Necklace,
+	Amulet,
+	Artifact,
+
+	// Resources
 	Consumable,
-	Material
+	Material,
+
+	// Unique
+	QuestItem
 };
 
 /**
  * 
  */
-UCLASS()
-class RPG_API URPGItem : public UDataAsset
+UCLASS(BlueprintType)
+class RPG_API URPGItem : public UObject
 {
 	GENERATED_BODY()
 	
@@ -75,10 +82,16 @@ public:
 	int GetItemLevel() const { return ItemLevel; }
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	float GetItemWeight() { return ItemWeight; }
+	bool IsStackable() { return bStackable; }
+
+	bool operator==(URPGItem& other)
+	{
+		return ItemID == other.ItemID;
+	}
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	//UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(BlueprintReadWrite, meta = (ExposeOnSpawn = true))
 	int ItemID;
 
 	UPROPERTY(EditAnywhere)
@@ -103,11 +116,8 @@ protected:
 	int ItemPrice;
 
 	UPROPERTY(EditAnywhere)
-	bool bStackable;
-
-	UPROPERTY(EditAnywhere)
-	float ItemWeight;
-
-	UPROPERTY(EditAnywhere)
 	int ItemLevel;
+
+	UPROPERTY(EditAnywhere)
+	bool bStackable;
 };

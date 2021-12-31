@@ -29,6 +29,9 @@ ARPGPlayerCharacter::ARPGPlayerCharacter()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	Camera->SetupAttachment(SpringArm);
 	Camera->bUsePawnControlRotation = false;
+
+	// Testing RestAPI Call
+	Http_Items = new RPGHttp_Items();
 }
 
 void ARPGPlayerCharacter::BeginPlay()
@@ -161,4 +164,5 @@ void ARPGPlayerCharacter::LookCamera(const float Value)
 
 void ARPGPlayerCharacter::Interact()
 {
+	Http_Items->TestHttpCall(0);
 }
