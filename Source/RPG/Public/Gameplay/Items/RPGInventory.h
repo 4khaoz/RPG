@@ -28,6 +28,14 @@ struct FItemSlot
 	UPROPERTY(BlueprintReadOnly)
 	uint8 SlotIndex;
 
+	UPROPERTY(BlueprintReadOnly)
+	int Stacks;
+
+	bool IsEmpty()
+	{
+		return Item == nullptr;
+	}
+
 	bool operator==(const FItemSlot& other) const
 	{
 		return Item == other.Item && SlotIndex == other.SlotIndex;

@@ -57,6 +57,8 @@ void URPGAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, MaxHunger, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, Thirst, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, MaxThirst, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, Defense, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet, Resistance, COND_None, REPNOTIFY_Always);
 }
 
 void URPGAttributeSet::OnRep_CharacterLevel(const FGameplayAttributeData& OldCharacterLevel)
@@ -117,4 +119,14 @@ void URPGAttributeSet::OnRep_Thirst(const FGameplayAttributeData& OldThirst)
 void URPGAttributeSet::OnRep_MaxThirst(const FGameplayAttributeData& OldMaxThirst)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet, MaxThirst, OldMaxThirst);
+}
+
+void URPGAttributeSet::OnRep_Defense(const FGameplayAttributeData& OldDefense)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet, Defense, OldDefense);
+}
+
+void URPGAttributeSet::OnRep_Resistance(const FGameplayAttributeData& OldResistance)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet, Resistance, OldResistance);
 }

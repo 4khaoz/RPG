@@ -24,20 +24,23 @@ void URPGAttributeSet_Advanced::GetLifetimeReplicatedProps(TArray<FLifetimePrope
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, CriticalRate, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, CriticalDamage, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, WeaponMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PyroMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, HydroMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, CryoMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, AeroMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, ElectroMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, GeoMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, LightMastery, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, DarknessMastery, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, TechniqueBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PowerBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PrecisionBonusDamage, COND_None, REPNOTIFY_Always);
 
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, Defense, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PhysicalResistance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PyroBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, HydroBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, CryoBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, AeroBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, ElectroBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, GeoBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, LightBonusDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, DarknessBonusDamage, COND_None, REPNOTIFY_Always);
+
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, TechniqueDefense, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PowerDefense, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PrecisionDefense, COND_None, REPNOTIFY_Always);
+
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, PyroResistance, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, HydroResistance, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, CryoResistance, COND_None, REPNOTIFY_Always);
@@ -50,69 +53,74 @@ void URPGAttributeSet_Advanced::GetLifetimeReplicatedProps(TArray<FLifetimePrope
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Advanced, Presence, COND_None, REPNOTIFY_Always);
 }
 
-void URPGAttributeSet_Advanced::OnRep_CriticalRate(const FGameplayAttributeData& OldCriticalRate)
+void URPGAttributeSet_Advanced::OnRep_TechniqueBonusDamage(const FGameplayAttributeData& OldTechniqueBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, CriticalRate, OldCriticalRate);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, TechniqueBonusDamage, OldTechniqueBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_CriticalDamage(const FGameplayAttributeData& OldCriticalDamage)
+void URPGAttributeSet_Advanced::OnRep_PowerBonusDamage(const FGameplayAttributeData& OldPowerBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, CriticalDamage, OldCriticalDamage);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, PowerBonusDamage, OldPowerBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_WeaponMastery(const FGameplayAttributeData& OldWeaponMastery)
+void URPGAttributeSet_Advanced::OnRep_PrecisionBonusDamage(const FGameplayAttributeData& OldPrecisionBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, WeaponMastery, OldWeaponMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, PrecisionBonusDamage, OldPrecisionBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_PyroMastery(const FGameplayAttributeData& OldPyroMastery)
+void URPGAttributeSet_Advanced::OnRep_PyroBonusDamage(const FGameplayAttributeData& OldPyroBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, PyroMastery, OldPyroMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, PyroBonusDamage, OldPyroBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_HydroMastery(const FGameplayAttributeData& OldHydroMastery)
+void URPGAttributeSet_Advanced::OnRep_HydroBonusDamage(const FGameplayAttributeData& OldHydroBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, HydroMastery, OldHydroMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, HydroBonusDamage, OldHydroBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_CryoMastery(const FGameplayAttributeData& OldCryoMastery)
+void URPGAttributeSet_Advanced::OnRep_CryoBonusDamage(const FGameplayAttributeData& OldCryoBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, CryoMastery, OldCryoMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, CryoBonusDamage, OldCryoBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_AeroMastery(const FGameplayAttributeData& OldAeroMastery)
+void URPGAttributeSet_Advanced::OnRep_AeroBonusDamage(const FGameplayAttributeData& OldAeroBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, AeroMastery, OldAeroMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, AeroBonusDamage, OldAeroBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_ElectroMastery(const FGameplayAttributeData& OldElectroMastery)
+void URPGAttributeSet_Advanced::OnRep_ElectroBonusDamage(const FGameplayAttributeData& OldElectroBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, ElectroMastery, OldElectroMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, ElectroBonusDamage, OldElectroBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_GeoMastery(const FGameplayAttributeData& OldGeoMastery)
+void URPGAttributeSet_Advanced::OnRep_GeoBonusDamage(const FGameplayAttributeData& OldGeoBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, GeoMastery, OldGeoMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, GeoBonusDamage, OldGeoBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_LightMastery(const FGameplayAttributeData& OldLightMastery)
+void URPGAttributeSet_Advanced::OnRep_LightBonusDamage(const FGameplayAttributeData& OldLightBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, LightMastery, OldLightMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, LightBonusDamage, OldLightBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_DarknessMastery(const FGameplayAttributeData& OldDarknessMastery)
+void URPGAttributeSet_Advanced::OnRep_DarknessBonusDamage(const FGameplayAttributeData& OldDarknessBonusDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, DarknessMastery, OldDarknessMastery);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, DarknessBonusDamage, OldDarknessBonusDamage);
 }
 
-void URPGAttributeSet_Advanced::OnRep_Defense(const FGameplayAttributeData& OldDefense)
+void URPGAttributeSet_Advanced::OnRep_TechniqueDefense(const FGameplayAttributeData& OldTechniqueDefense)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, Defense, OldDefense);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, TechniqueDefense, OldTechniqueDefense);
 }
 
-void URPGAttributeSet_Advanced::OnRep_PhysicalResistance(const FGameplayAttributeData& OldPhysicalResistance)
+void URPGAttributeSet_Advanced::OnRep_PowerDefense(const FGameplayAttributeData& OldPowerDefense)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, PhysicalResistance, OldPhysicalResistance);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, PowerDefense, OldPowerDefense);
+}
+
+void URPGAttributeSet_Advanced::OnRep_PrecisionDefense(const FGameplayAttributeData& OldPrecisionDefense)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Advanced, PrecisionDefense, OldPrecisionDefense);
 }
 
 void URPGAttributeSet_Advanced::OnRep_PyroResistance(const FGameplayAttributeData& OldPyroResistance)

@@ -15,8 +15,8 @@
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 /**
- * Attributes for Resources
- * like Health, Mana, Stamina
+ * Attributes every Character has (Player, NPC, Enemies)
+ * e.g. Health, Mana, Stamina, Defense, Resistance
  */
 UCLASS()
 class RPG_API URPGAttributeSet : public UAttributeSet
@@ -92,6 +92,16 @@ public:
 	FGameplayAttributeData MaxThirst;
 	ATTRIBUTE_ACCESSORS(URPGAttributeSet, MaxThirst)
 
+	/* Damage-Reduction against physical Damage */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Defense)
+	FGameplayAttributeData Defense;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Defense)
+
+	/* Damage-Reduction against magical Damage */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Resistance)
+	FGameplayAttributeData Resistance;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet, Resistance)
+
 protected:
 	/**
 	OnRep functions for GameplayAttributes
@@ -131,4 +141,10 @@ protected:
 
 	UFUNCTION()
 	virtual void OnRep_MaxThirst(const FGameplayAttributeData& OldMaxThirst);
+
+	UFUNCTION()
+	virtual void OnRep_Defense(const FGameplayAttributeData& OldDefense);
+
+	UFUNCTION()
+	virtual void OnRep_Resistance(const FGameplayAttributeData& OldResistance);
 };

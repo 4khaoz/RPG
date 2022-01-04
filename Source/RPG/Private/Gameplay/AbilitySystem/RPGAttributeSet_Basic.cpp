@@ -25,16 +25,19 @@ void URPGAttributeSet_Basic::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, PowerLevel, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, Damage, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, Strength, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, Intelligence, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, Spirituality, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, Vitality, COND_None, REPNOTIFY_Always);
+
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, CriticalRate, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(URPGAttributeSet_Basic, CriticalDamage, COND_None, REPNOTIFY_Always);
 }
 
-void URPGAttributeSet_Basic::OnRep_PowerLevel(const FGameplayAttributeData& OldPowerLevel)
+void URPGAttributeSet_Basic::OnRep_Damage(const FGameplayAttributeData& OldDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Basic, PowerLevel, OldPowerLevel);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Basic, Damage, OldDamage);
 }
 
 void URPGAttributeSet_Basic::OnRep_Strength(const FGameplayAttributeData& OldStrength)
@@ -55,4 +58,14 @@ void URPGAttributeSet_Basic::OnRep_Spirituality(const FGameplayAttributeData& Ol
 void URPGAttributeSet_Basic::OnRep_Vitality(const FGameplayAttributeData& OldVitality)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Basic, Vitality, OldVitality);
+}
+
+void URPGAttributeSet_Basic::OnRep_CriticalRate(const FGameplayAttributeData& OldCriticalRate)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Basic, CriticalRate, OldCriticalRate);
+}
+
+void URPGAttributeSet_Basic::OnRep_CriticalDamage(const FGameplayAttributeData& OldCriticalDamage)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(URPGAttributeSet_Basic, CriticalDamage, OldCriticalDamage);
 }

@@ -32,70 +32,87 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	/* Chance of Critical Hits */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CriticalRate)
-	FGameplayAttributeData CriticalRate;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CriticalRate)
+	////////////////////////////////////////////////////////////////////////////////
+	// Physical Damage Multiplier
 
-	/* Damage Multiplier of Critical Hits */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CriticalDamage)
-	FGameplayAttributeData CriticalDamage;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CriticalDamage)
+	/* Damage Multiplier for Physical Damage done with Sword, Dagger and Spear */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_TechniqueBonusDamage)
+	FGameplayAttributeData TechniqueBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, TechniqueBonusDamage)
 
-	/* Damage Multiplier for Physical Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_WeaponMastery)
-	FGameplayAttributeData WeaponMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, WeaponMastery)
+	/* Damage Multiplier for Physical Damage done with Greatsword, Battleaxe and Warhammer */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PowerBonusDamage)
+	FGameplayAttributeData PowerBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, PowerBonusDamage)
+
+	/* Damage Multiplier for Physical Damage done with Bow, Rifle and Cannon */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PrecisionBonusDamage)
+	FGameplayAttributeData PrecisionBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, PrecisionBonusDamage)
+
+	////////////////////////////////////////////////////////////////////////////////
+	// Magical Damage Multiplier Stats
 
 	/* Damage Multiplier for Pyro Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PyroMastery)
-	FGameplayAttributeData PyroMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, PyroMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PyroBonusDamage)
+	FGameplayAttributeData PyroBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, PyroBonusDamage)
 
 	/* Damage Multiplier for Hydro Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_HydroMastery)
-	FGameplayAttributeData HydroMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, HydroMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_HydroBonusDamage)
+	FGameplayAttributeData HydroBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, HydroBonusDamage)
 
 	/* Damage Multiplier for Cryo Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CryoMastery)
-	FGameplayAttributeData CryoMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CryoMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CryoBonusDamage)
+	FGameplayAttributeData CryoBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CryoBonusDamage)
 
 	/* Damage Multiplier for Aero Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_AeroMastery)
-	FGameplayAttributeData AeroMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, AeroMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_AeroBonusDamage)
+	FGameplayAttributeData AeroBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, AeroBonusDamage)
 
 	/* Damage Multiplier for Electro Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_ElectroMastery)
-	FGameplayAttributeData ElectroMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, ElectroMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_ElectroBonusDamage)
+	FGameplayAttributeData ElectroBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, ElectroBonusDamage)
 
 	/* Damage Multiplier for Geo Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_GeoMastery)
-	FGameplayAttributeData GeoMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, GeoMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_GeoBonusDamage)
+	FGameplayAttributeData GeoBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, GeoBonusDamage)
 
 	/* Damage Multiplier for Light Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_LightMastery)
-	FGameplayAttributeData LightMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, LightMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_LightBonusDamage)
+	FGameplayAttributeData LightBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, LightBonusDamage)
 
 	/* Damage Multiplier for Darkness Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_DarknessMastery)
-	FGameplayAttributeData DarknessMastery;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, DarknessMastery)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_DarknessBonusDamage)
+	FGameplayAttributeData DarknessBonusDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, DarknessBonusDamage)
 
-	/* Defense ; Scaling Value for Damage-Reduction against all types of Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Defense)
-	FGameplayAttributeData Defense;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, Defense)
+	////////////////////////////////////////////////////////////////////////////////
+	// CRIT Stats
 
-	/* Reduction Multiplier against Physical Damage */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PhysicalResistance)
-	FGameplayAttributeData PhysicalResistance;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, PhysicalResistance)
+	/* Reduction Multiplier against Physical Damage done with Sword, Dagger and Spear */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_TechniqueResistance)
+	FGameplayAttributeData TechniqueDefense;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, TechniqueResistance)
+
+	/* Reduction Multiplier against Physical Damage done with Greatsword, Battleaxe and Warhammer */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PowerDefense)
+	FGameplayAttributeData PowerDefense;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, PowerDefense)
+
+	/* Reduction Multiplier against Physical Damage done with Bow, Rifle and Cannon */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PrecisionDefense)
+	FGameplayAttributeData PrecisionDefense;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, PrecisionDefense)
+
+	////////////////////////////////////////////////////////////////////////////////
+	// CRIT Stats
 
 	/* Reduction Multiplier against Pyro Damage */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PyroResistance)
@@ -137,6 +154,8 @@ public:
 	FGameplayAttributeData DarknessResistance;
 	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, DarknessResistance)
 
+
+
 	/* Increase Aggro-Generation */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Presence)
 	FGameplayAttributeData Presence;
@@ -144,43 +163,46 @@ public:
 
 protected:
 	UFUNCTION()
-	virtual void OnRep_CriticalRate(const FGameplayAttributeData& OldCriticalRate);
+	virtual void OnRep_TechniqueBonusDamage(const FGameplayAttributeData& OldTechniqueBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_CriticalDamage(const FGameplayAttributeData& OldCriticalDamage);
+	virtual void OnRep_PowerBonusDamage(const FGameplayAttributeData& OldPowerBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_WeaponMastery(const FGameplayAttributeData& OldWeaponMastery);
+	virtual void OnRep_PrecisionBonusDamage(const FGameplayAttributeData& OldPrecisionBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_PyroMastery(const FGameplayAttributeData& OldPyroMastery);
+	virtual void OnRep_PyroBonusDamage(const FGameplayAttributeData& OldPyroBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_HydroMastery(const FGameplayAttributeData& OldHydroMastery);
+	virtual void OnRep_HydroBonusDamage(const FGameplayAttributeData& OldHydroBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_CryoMastery(const FGameplayAttributeData& OldCryoMastery);
+	virtual void OnRep_CryoBonusDamage(const FGameplayAttributeData& OldCryoBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_AeroMastery(const FGameplayAttributeData& OldAeroMastery);
+	virtual void OnRep_AeroBonusDamage(const FGameplayAttributeData& OldAeroBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_ElectroMastery(const FGameplayAttributeData& OldElectroMastery);
+	virtual void OnRep_ElectroBonusDamage(const FGameplayAttributeData& OldElectroBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_GeoMastery(const FGameplayAttributeData& OldGeoMastery);
+	virtual void OnRep_GeoBonusDamage(const FGameplayAttributeData& OldGeoBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_LightMastery(const FGameplayAttributeData& OldLightMastery);
+	virtual void OnRep_LightBonusDamage(const FGameplayAttributeData& OldLightBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_DarknessMastery(const FGameplayAttributeData& OldDarknessMastery);
+	virtual void OnRep_DarknessBonusDamage(const FGameplayAttributeData& OldDarknessBonusDamage);
 
 	UFUNCTION()
-	virtual void OnRep_Defense(const FGameplayAttributeData& OldDefense);
+	virtual void OnRep_TechniqueDefense(const FGameplayAttributeData& OldTechniqueDefense);
 
 	UFUNCTION()
-	virtual void OnRep_PhysicalResistance(const FGameplayAttributeData& OldPhysicalResistance);
+	virtual void OnRep_PowerDefense(const FGameplayAttributeData& OldPowerDefense);
+
+	UFUNCTION()
+	virtual void OnRep_PrecisionDefense(const FGameplayAttributeData& OldPrecisionDefense);
 
 	UFUNCTION()
 	virtual void OnRep_PyroResistance(const FGameplayAttributeData& OldPyroResistance);

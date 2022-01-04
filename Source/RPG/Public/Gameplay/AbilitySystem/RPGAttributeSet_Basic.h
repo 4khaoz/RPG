@@ -31,9 +31,15 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PowerLevel)
-	FGameplayAttributeData PowerLevel;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Basic, PowerLevel)
+	////////////////////////////////////////////////////////////////////////////////
+	// Damage Stats
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Damage)
+	FGameplayAttributeData Damage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Basic, Damage)
+
+	////////////////////////////////////////////////////////////////////////////////
+	// Core Attributes
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_Strength)
 	FGameplayAttributeData Strength;
@@ -51,9 +57,22 @@ public:
 	FGameplayAttributeData Vitality;
 	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Basic, Vitality)
 
+	////////////////////////////////////////////////////////////////////////////////
+	// CRIT Stats
+
+	/* Chance of Critical Hits */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CriticalRate)
+	FGameplayAttributeData CriticalRate;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CriticalRate)
+
+	/* Damage Multiplier of Critical Hits */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CriticalDamage)
+	FGameplayAttributeData CriticalDamage;
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CriticalDamage)
+
 protected:
 	UFUNCTION()
-	virtual void OnRep_PowerLevel(const FGameplayAttributeData& OldPowerLevel);
+	virtual void OnRep_Damage(const FGameplayAttributeData& OldDamage);
 
 	UFUNCTION()
 	virtual void OnRep_Strength(const FGameplayAttributeData& OldStrength);
@@ -66,4 +85,10 @@ protected:
 
 	UFUNCTION()
 	virtual void OnRep_Vitality(const FGameplayAttributeData& OldVitality);
+
+	UFUNCTION()
+	virtual void OnRep_CriticalRate(const FGameplayAttributeData& OldCriticalRate);
+
+	UFUNCTION()
+	virtual void OnRep_CriticalDamage(const FGameplayAttributeData& OldCriticalDamage);
 };
