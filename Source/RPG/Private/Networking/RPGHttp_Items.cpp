@@ -32,7 +32,14 @@ void RPGHttp_Items::OnResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr
 {
 	if (Response->GetResponseCode() == EHttpResponseCodes::Ok)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green, Response->GetContentAsString());
+		TSharedPtr<FJsonObject> JsonObject;
+		const FString ResponseBody = Response->GetContentAsString();
+		TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(ResponseBody);
+
+		if (FJsonSerializer::Deserialize(JsonReader, JsonObject))
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green, ResponseBody);
+		}
 	}
 	else
 	{

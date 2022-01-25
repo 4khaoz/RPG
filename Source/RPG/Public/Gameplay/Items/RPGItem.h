@@ -52,7 +52,9 @@ public:
 		: ItemQuality(EItemQuality::Common)
 		, ItemPrice(0)
 		, ItemLevel(1)
-	{}
+	{
+		ItemImage = LoadObject<UTexture2D>(NULL, TEXT("Texture2D'/Game/Assets/Textures/Testimage.Testimage'"), NULL, LOAD_None, NULL);
+	}
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetItemID() const { return ItemID; }
@@ -120,4 +122,10 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	bool bStackable;
+
+	/*
+	Load Item Data from Database
+	@params	id		ItemID
+	*/
+	void LoadItemData(int id);
 };

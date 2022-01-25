@@ -12,15 +12,6 @@ URPGInventory::URPGInventory()
 
 bool URPGInventory::ServerAddItem_Validate(URPGItem* item)
 {
-	// Find Index for first free slot
-	FreeSlotIndex = FindFirstFreeSlot();
-	if (FreeSlotIndex == -1)
-	{
-		// Inventory is full
-		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, "Free Slot not found - Inventory full");
-		return false;
-	}
-
 	// HTTP Call to add item to Database
 	// Successful if Response Success
 	
@@ -30,32 +21,20 @@ bool URPGInventory::ServerAddItem_Validate(URPGItem* item)
 
 void URPGInventory::ServerAddItem_Implementation(URPGItem* item)
 {
-	InventoryContainer[FreeSlotIndex] = FItemSlot(item, FreeSlotIndex);
+	InventoryContainer.Add(FItemSlot(item));
 	ClientOnInventoryUpdate();
 }
 
-bool URPGInventory::ServerRemoveItemByIndex_Validate()
+bool URPGInventory::ServerRemoveItem_Validate(int index)
 {
-	return true;
-}
-
-void URPGInventory::ServerRemoveItemByIndex_Implementation()
-{
-
-}
-
-bool URPGInventory::ServerInsertItemAtIndex_Validate(URPGItem* item, int index)
-{
-	if (!InventoryContainer.IsValidIndex(index))
-	{
+	if (!InventoryContainer.IsValidIndex(index)) 
 		return false;
-	}
 	return true;
 }
 
-void URPGInventory::ServerInsertItemAtIndex_Implementation(URPGItem* item, int index)
+void URPGInventory::ServerRemoveItem_Implementation(int index)
 {
-	
+	InventoryContainer.RemoveAt(index);
 }
 
 URPGItem* URPGInventory::GetItemAt(int index)
@@ -112,21 +91,6 @@ void URPGInventory::BeginPlay()
 
 	// ...
 	
-}
-
-int URPGInventory::FindFirstFreeSlot()
-{
-	// -1 means it is invalid
-	int index = -1;
-	for (int i = 0; i < Capacity; i++)
-	{
-		if (!InventoryContainer[index].Item)
-		{
-			index = i;
-			break;
-		}
-	}
-	return index;
 }
 
 void URPGInventory::OnRep_Inventory()

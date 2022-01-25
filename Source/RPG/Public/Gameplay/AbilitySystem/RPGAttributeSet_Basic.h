@@ -63,12 +63,12 @@ public:
 	/* Chance of Critical Hits */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CriticalRate)
 	FGameplayAttributeData CriticalRate;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CriticalRate)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Basic, CriticalRate)
 
 	/* Damage Multiplier of Critical Hits */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_CriticalDamage)
 	FGameplayAttributeData CriticalDamage;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, CriticalDamage)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Basic, CriticalDamage)
 
 protected:
 	UFUNCTION()

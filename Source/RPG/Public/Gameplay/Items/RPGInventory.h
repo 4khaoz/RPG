@@ -12,21 +12,18 @@ struct FItemSlot
 {
 	GENERATED_USTRUCT_BODY()
 
-	// Default Constructor, -1 means invalid
+	// Default Constructor, 0 means invalid
 	FItemSlot() 
-		: SlotIndex(-1)
+		: Stacks(0)
 	{ }
 
-	FItemSlot(URPGItem* item, uint8 index)
+	FItemSlot(URPGItem* item)
 		: Item(item)
-		, SlotIndex(index)
+		, Stacks(1)
 	{ }
 
 	UPROPERTY(BlueprintReadOnly)
 	URPGItem* Item;
-
-	UPROPERTY(BlueprintReadOnly)
-	uint8 SlotIndex;
 
 	UPROPERTY(BlueprintReadOnly)
 	int Stacks;
@@ -38,7 +35,7 @@ struct FItemSlot
 
 	bool operator==(const FItemSlot& other) const
 	{
-		return Item == other.Item && SlotIndex == other.SlotIndex;
+		return Item == other.Item;
 	}
 };
 
@@ -63,11 +60,7 @@ public:
 
 	/* Remove Item from Inventory */
 	UFUNCTION(BlueprintCallable, Server, WithValidation, Reliable)
-	void ServerRemoveItemByIndex();
-
-	/* Insert Item at specified Inventory index */
-	UFUNCTION(BlueprintCallable, Server, WithValidation, Reliable)
-	void ServerInsertItemAtIndex(URPGItem* item, int index);
+	void ServerRemoveItem(int index);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Getters
@@ -104,10 +97,6 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-	// Returns index of first free slot, -1 if invalid
-	int FindFirstFreeSlot();
-	int FreeSlotIndex;
 
 	// Maximum number of items in the inventory
 	int Capacity;

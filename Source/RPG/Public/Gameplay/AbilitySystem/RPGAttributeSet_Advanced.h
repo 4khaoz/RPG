@@ -97,9 +97,9 @@ public:
 	// CRIT Stats
 
 	/* Reduction Multiplier against Physical Damage done with Sword, Dagger and Spear */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_TechniqueResistance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_TechniqueDefense)
 	FGameplayAttributeData TechniqueDefense;
-	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, TechniqueResistance)
+	ATTRIBUTE_ACCESSORS(URPGAttributeSet_Advanced, TechniqueDefense)
 
 	/* Reduction Multiplier against Physical Damage done with Greatsword, Battleaxe and Warhammer */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attributes", ReplicatedUsing = OnRep_PowerDefense)
