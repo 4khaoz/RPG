@@ -53,8 +53,15 @@ public:
 		, ItemPrice(0)
 		, ItemLevel(1)
 	{
-		ItemImage = LoadObject<UTexture2D>(NULL, TEXT("Texture2D'/Game/Assets/Textures/Testimage.Testimage'"), NULL, LOAD_None, NULL);
+		LoadItemData();
+		//ItemImage = LoadObject<UTexture2D>(NULL, TEXT("Texture2D'/Game/Assets/Textures/Testimage.Testimage'"), NULL, LOAD_None, NULL);
 	}
+
+	void ReloadItemData(
+		FString name,
+		FString description,
+		FString imagepath
+	);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetItemID() const { return ItemID; }
@@ -127,5 +134,5 @@ protected:
 	Load Item Data from Database
 	@params	id		ItemID
 	*/
-	void LoadItemData(int id);
+	void LoadItemData();
 };

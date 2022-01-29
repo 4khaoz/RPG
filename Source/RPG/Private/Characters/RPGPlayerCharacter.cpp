@@ -164,5 +164,5 @@ void ARPGPlayerCharacter::LookCamera(const float Value)
 
 void ARPGPlayerCharacter::Interact()
 {
-	Http_Items->TestHttpCall(0);
+	
 }

@@ -14,9 +14,8 @@ public:
 	RPGHttp_Items();
 	~RPGHttp_Items();
 
-	void TestHttpCall(int item_id);
-
-	void OnResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
+	void HttpGetItemData(class URPGItem* Item);
+	void OnResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful, class URPGItem* Item);
 
 protected:
 	FHttpModule* Http;
